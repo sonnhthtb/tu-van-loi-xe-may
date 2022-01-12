@@ -23,6 +23,7 @@ a:hover {
     /* Prevent inheritance from `body` */
     background-color: #0061fe;
     border: .05rem solid #0061fe;
+    background-repeat: repeat;
 }
 
 

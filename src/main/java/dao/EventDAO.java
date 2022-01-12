@@ -38,4 +38,27 @@ public class EventDAO extends BaseDAO{
             closeAll(connection, statement, resultSet);
         }
     }
+
+    public Event findByCode(String code) {
+        String sql = "SELECT Distinct *  FROM `event` WHERE code = ?";
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(sql);
+            setParameter(statement, code);
+            resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                Event event = new Event();
+                event.setCode(resultSet.getString("code"));
+                event.setEvent(resultSet.getString("event"));
+                return event;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            closeAll(connection, statement, resultSet);
+        }
+        return null;
+    }
+
 }

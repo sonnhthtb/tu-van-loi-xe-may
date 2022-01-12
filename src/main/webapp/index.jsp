@@ -29,8 +29,9 @@
 
             <h4 class="text-center"> Tình trạng xe:</h4>
             <br>
-            <p class="lead"> Xe không khởi động được </p>
-            <p class="lead"> Đề xe không lên </p>
+            <c:forEach var="option" items="${sessionScope.options}">
+                <p class="lead"> ${option.event} </p>
+            </c:forEach>
         </div>
     </header>
 
@@ -38,6 +39,7 @@
         <main role="main" class="inner cover">
 
             <div class="form-check lead">
+            <c:if test="${not empty check.tutorial}">
                 <h1 class="cover-heading">${check.content}</h1>
                 <c:if test="${not empty check.tutorial}">
                     <br>
@@ -45,6 +47,12 @@
                 </c:if>
                 <br>
                 <br>
+            </c:if>
+            <c:if test="${empty check}">
+                <h1 class="cover-heading">Tình trạng xe của bạn hiện tại?</h1>
+                <br>
+                <br>
+            </c:if>
                 <c:if test="${not empty events}">
                     <c:forEach var="item" items="${events}">
                         <div class="row">
