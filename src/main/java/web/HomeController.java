@@ -2,8 +2,10 @@ package web;
 
 import dao.CheckDAO;
 import dao.EventDAO;
+import dao.RuleDAO;
 import model.Check;
 import model.Event;
+import model.Rule;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,6 +23,7 @@ public class HomeController extends HttpServlet {
 
     private final EventDAO eventDAO = new EventDAO();
     private final CheckDAO checkDAO = new CheckDAO();
+    private final RuleDAO ruleDAO = new RuleDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,10 +41,24 @@ public class HomeController extends HttpServlet {
         }
         historyEvents.add(eventDAO.findByCode(code));
         session.setAttribute("options", historyEvents);
-        List<Event> events = eventDAO.findByParentCode(code);
-        Check check = checkDAO.findByParentCode(code);
-        request.setAttribute("events", events);
-        request.setAttribute("check", check);
+        String tmpRule = "";
+        for (Event event: historyEvents) {
+            if (event != null)
+                tmpRule += (event.getCode() +  " AND ");
+        }
+        if (tmpRule.length() > 5) {
+            tmpRule = tmpRule.substring(0, tmpRule.length() - 5);
+        }
+        Rule rule = ruleDAO.findByIf(tmpRule);
+        if (rule != null) {
+            request.setAttribute("rule", rule);
+            session.removeAttribute("options");
+        } else {
+            List<Event> events = eventDAO.findByParentCode(code);
+            Check check = checkDAO.findByParentCode(code);
+            request.setAttribute("events", events);
+            request.setAttribute("check", check);
+        }
         RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
         dispatcher.forward(request, response);
 

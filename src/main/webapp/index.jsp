@@ -34,78 +34,93 @@
             </c:forEach>
         </div>
     </header>
+    <c:if test="${ rule == null}">
+        <form action="<c:url value='/home'/>" method="post">
+            <main role="main" class="inner cover">
 
-    <form action="<c:url value='/home'/>" method="post">
-        <main role="main" class="inner cover">
-
-            <div class="form-check lead">
-            <c:if test="${not empty check.tutorial}">
-                <h1 class="cover-heading">${check.content}</h1>
-                <c:if test="${not empty check.tutorial}">
+                <div class="form-check lead">
+                <c:if test="${not empty check}">
+                    <h1 class="cover-heading">${check.content}</h1>
+                    <c:if test="${not empty check.tutorial}">
+                        <br>
+                        <h3 style="background-color: #0061fe">Hướng dẫn: ${check.tutorial}</h3>
+                    </c:if>
                     <br>
-                    <h3>Hướng dẫn: ${check.tutorial}</h3>
+                    <br>
                 </c:if>
-                <br>
-                <br>
-            </c:if>
-            <c:if test="${empty check}">
-                <h1 class="cover-heading">Tình trạng xe của bạn hiện tại?</h1>
-                <br>
-                <br>
-            </c:if>
-                <c:if test="${not empty events}">
-                    <c:forEach var="item" items="${events}">
+                <c:if test="${empty check}">
+                    <h1 class="cover-heading">Tình trạng xe của bạn hiện tại?</h1>
+                    <br>
+                    <br>
+                </c:if>
+                    <c:if test="${not empty events}">
+                        <c:forEach var="item" items="${events}">
+                            <div class="row">
+                                <div class="col-sm">
+                                    <input class="form-check-input" type="checkbox" value="${item.code}" id="${item.code}" size="200px"
+                                           name="code" onclick="myFun(this)">
+                                    <label class="form-check-label" for="${item.code}">
+                                        ${item.event}
+                                    </label>
+                                    <br>
+                                    <br>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </c:if>
+                    <c:if test="${empty events}">
+                        <h1 class="cover-heading">Bạn gặp lỗi xe khi?</h1>
+                        <br>
+                        <br>
                         <div class="row">
                             <div class="col-sm">
-                                <input class="form-check-input" type="checkbox" value="${item.code}" id="${item.code}" size="200px"
+                                <input class="form-check-input" type="checkbox" value="SK01" id="SK01" size="200px"
                                        name="code" onclick="myFun(this)">
-                                <label class="form-check-label" for="${item.code}">
-                                    ${item.event}
+                                <label class="form-check-label" for="SK01">
+                                    Lỗi khi xe khởi động
+                                </label>
+                                <br>
+                                <br>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm">
+                                <input class="form-check-input" type="checkbox" value="SK11" id="SK11" size="200px"
+                                       name="code" onclick="myFun(this)">
+                                <label class="form-check-label" for="SK11">
+                                    Lỗi khi xe đang di chuyển
                                 </label>
                                 <br>
                                 <br>
                                 <br>
                             </div>
                         </div>
-                    </c:forEach>
-                </c:if>
-                <c:if test="${empty events}">
-                    <h1 class="cover-heading">Bạn gặp lỗi xe khi?</h1>
+                    </c:if>
+                    <p class="lead">
+                        <button class="btn btn-lg btn-secondary" type="submit" >Submit</button>
+                        <br>
+                        <br>
+                        <a href="/return" class="btn btn-danger">Quay về ban đầu</a>
+                    </p>
+                </div>
+
+            </main>
+        </form>
+    </c:if>
+    <c:if test="${rule != null}">
+        <main role="main" class="inner cover">
+            <div class="form-check lead">
+                <h1 class="cover-heading">Xác định lỗi: ${rule.then}</h1>
                     <br>
-                    <br>
-                    <div class="row">
-                        <div class="col-sm">
-                            <input class="form-check-input" type="checkbox" value="SK01" id="SK01" size="200px"
-                                   name="code" onclick="myFun(this)">
-                            <label class="form-check-label" for="SK01">
-                                Lỗi khi xe khởi động
-                            </label>
-                            <br>
-                            <br>
-                            <br>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm">
-                            <input class="form-check-input" type="checkbox" value="SK11" id="SK11" size="200px"
-                                   name="code" onclick="myFun(this)">
-                            <label class="form-check-label" for="SK11">
-                                Lỗi khi xe đang di chuyển
-                            </label>
-                            <br>
-                            <br>
-                            <br>
-                        </div>
-                    </div>
-                </c:if>
-                <p class="lead">
-                    <button class="btn btn-lg btn-secondary" type="submit" >Submit</button>
-                </p>
+                    <h3 style="background-color: #0061fe">Hướng dẫn: ${rule.tutorial}</h3>
+                <br>
+                <br>
+            <p class="lead">
+            <a href="/return" class="btn btn-danger">Quay về ban đầu</a>
+            </p>
             </div>
-
         </main>
-    </form>
-
+    </c:if>
     <footer class="mastfoot mt-auto">
         <div class="inner">
             <p>Vũ Cao Sơn - Phùng Minh Đức - Đỗ Đăng Mạnh</p>
