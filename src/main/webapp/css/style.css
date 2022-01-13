@@ -38,7 +38,7 @@ html,
 body {
     height: 100%;
     background-color: #333;
-    background-image: url("/css/backgroud.png");
+    background-image: url("./backgroud.png");
     background-size: cover;
 }
 
