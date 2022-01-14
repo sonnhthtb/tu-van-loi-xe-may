@@ -56,11 +56,11 @@
                     <c:if test="${not empty events}">
                         <c:forEach var="item" items="${events}">
                             <div class="row">
-                                <div class="col-sm-1 text-left" >
+                                <div class="col-sm-5 text-right" >
                                     <input class="form-check-input" type="checkbox" value="${item.code}" id="${item.code}" size="200px"
                                            name="code" onclick="myFun(this)">
                                 </div>
-                                <div class="col-sm">
+                                <div class="col-sm-7 text-left">
                                     <label class="form-check-label" for="${item.code}">
                                         ${item.event}
                                     </label>
@@ -75,11 +75,11 @@
                         <br>
                         <br>
                         <div class="row">
-                            <div class="col-sm-1 text-left" >
-                                <input class="form-check-input" type="checkbox" value="SK01" id="SK01" size="200px"
+                            <div class="col-sm-5  text-right" >
+                                <input class="form-check-input text-left" type="checkbox" value="SK01" id="SK01" size="200px"
                                        name="code" onclick="myFun(this)">
                             </div>
-                            <div class="col-sm" >
+                            <div class="col-sm-7 text-left" >
                                 <label class="form-check-label" for="SK01">
                                     Lỗi khi xe khởi động
                                 </label>
@@ -88,11 +88,11 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-1 text-left" >
-                                <input class="form-check-input" type="checkbox" value="SK11" id="SK11" size="200px"
+                            <div class="col-sm-5 text-right" >
+                                <input class="form-check-input text-left" type="checkbox" value="SK11" id="SK11" size="200px"
                                        name="code" onclick="myFun(this)">
                             </div>
-                            <div class="col-sm">
+                            <div class="col-sm-7 text-left">
 
                                 <label class="form-check-label" for="SK11">
                                     Lỗi khi xe đang di chuyển

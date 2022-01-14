@@ -52,7 +52,6 @@ public class HomeController extends HttpServlet {
         Rule rule = ruleDAO.findByIf(tmpRule);
         if (rule != null) {
             request.setAttribute("rule", rule);
-            session.removeAttribute("options");
         } else {
             List<Event> events = eventDAO.findByParentCode(code);
             Check check = checkDAO.findByParentCode(code);
