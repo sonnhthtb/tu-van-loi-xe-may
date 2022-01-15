@@ -104,7 +104,7 @@
                         </div>
                     </c:if>
                     <p class="lead">
-                        <button class="btn btn-lg btn-secondary" type="submit" >Submit</button>
+                        <button class="btn btn-lg btn-secondary" type="submit"  id="submit">Submit</button>
                         <br>
                         <br>
                         <a href="<c:url value='${request.contextPath}/return' />" class="btn btn-danger">Quay về ban đầu</a>
@@ -135,7 +135,7 @@
     </footer>
 </div>
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -146,6 +146,15 @@
             if (item !== checkbox) item.checked = false
         })
     }
+    $('#submit').prop("disabled", true);
+    $('input:checkbox').click(function() {
+        if ($(this).is(':checked')) {
+            $('#submit').prop("disabled", false);
+        } else {
+            if ($('.form-check-input').filter(':checked').length < 1){
+                $('#submit').attr('disabled',true);}
+        }
+    });
 </script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
